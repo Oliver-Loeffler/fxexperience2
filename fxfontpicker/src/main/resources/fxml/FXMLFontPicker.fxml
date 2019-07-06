@@ -4,20 +4,20 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<fx:root maxWidth="1.7976931348623157E308" prefHeight="230.0" styleClass="font-picker-pane" stylesheets="@../styles/font_picker.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxWidth="1.7976931348623157E308" prefHeight="230.0" styleClass="font-picker-pane" stylesheets="@../styles/font_picker.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane fx:id="textGridPanel" alignment="TOP_RIGHT" hgap="5.0" maxWidth="1.7976931348623157E308" vgap="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" prefWidth="75.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="80.0" prefWidth="80.0" />
             <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="0.0" minWidth="-Infinity" prefWidth="0.0" />
             <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="0.0" minWidth="-Infinity" prefWidth="0.0" />
@@ -27,7 +27,8 @@
             <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="42.0" vgrow="NEVER" />
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="42.0" vgrow="NEVER" />
             <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="10.0" vgrow="NEVER" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="72.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="72.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="ALWAYS" />
          </rowConstraints>
          <children>
             <Label alignment="CENTER" styleClass="prop-label" text="Family:" GridPane.halignment="LEFT">
@@ -51,10 +52,11 @@
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin></Label>
-            <Text fx:id="sampleFontText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sample-text" text="Sample Text" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
-               <font>
-                  <Font size="15.0" />
-               </font></Text>
+            <ScrollPane fitToHeight="true" fitToWidth="true" maxWidth="1.7976931348623157E308" pannable="true" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+               <content>
+                  <TextArea fx:id="sampleFontText" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="Type here ..." text="SampleText" />
+               </content>
+            </ScrollPane>
          </children>
       </GridPane>
    </children>

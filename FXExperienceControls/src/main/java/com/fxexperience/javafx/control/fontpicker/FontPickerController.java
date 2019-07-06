@@ -1,20 +1,5 @@
 package com.fxexperience.javafx.control.fontpicker;
 
-import com.fxexperience.javafx.scene.control.colorpicker.ColorPickerControl;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -23,11 +8,35 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+
+import com.fxexperience.javafx.scene.control.colorpicker.ColorPickerControl;
+
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 public class FontPickerController extends AnchorPane {
 
-    private final ObservableList<String> fixedSizes = FXCollections.observableArrayList(getFixedFontSizes());
-    private NumberFormat numberFormat = DecimalFormat.getInstance(Locale.getDefault());
+    private final ObservableList<String> fixedSizes;
+    
+    private final NumberFormat numberFormat;
 
     @FXML private ComboBox<String> familyComboBox;
     @FXML private ChoiceBox<String> styleChoiceBox;
@@ -35,9 +44,9 @@ public class FontPickerController extends AnchorPane {
     @FXML private ToggleGroup fontRadioGroup;
     @FXML private RadioButton fixedFontRadio;
     @FXML private RadioButton scalableFontRadio;
-    @FXML private Text sampleFontText;
+    @FXML private TextArea sampleFontText;
 
-    private ObjectProperty<Font> font = new SimpleObjectProperty<>(Font.getDefault());
+    private ObjectProperty<Font> font;
 
     public Font getFont() {
         return font.get();
@@ -52,6 +61,10 @@ public class FontPickerController extends AnchorPane {
     }
 
     public FontPickerController() {
+    	this.numberFormat = DecimalFormat.getInstance(Locale.getDefault());
+    	this.fixedSizes = FXCollections.observableArrayList(getFixedFontSizes());
+    	this.font =  new SimpleObjectProperty<>(Font.getDefault());
+    	
         initialize();
     }
 
@@ -103,7 +116,9 @@ public class FontPickerController extends AnchorPane {
         // Size font combo-box
         sizeComboBox.getItems().setAll(fixedSizes);
         sizeComboBox.getSelectionModel().select(4);
-        sizeComboBox.valueProperty().addListener(observable -> changeFont());
+        sizeComboBox.valueProperty().addListener(observable -> 
+        changeFont()
+        );
     }
 
     private void changeFont() {
@@ -136,11 +151,16 @@ public class FontPickerController extends AnchorPane {
 
     }
 
-    private static List<String> getFixedFontSizes() {
-        String[] predefinedFontSizes
-                = {"9.0", "10.0", "11.0", "12.0",
-                  "13.0", "14.0", "18.0", "24.0"};
-        return Arrays.asList(predefinedFontSizes);
+    private List<String> getFixedFontSizes() {
+        double[] predefinedFontSizes
+                = { 9.0, 10.0, 11.0, 12.0,
+                   13.0, 14.0, 18.0, 24.0};
+        
+        
+        return DoubleStream.of(predefinedFontSizes)
+		        			.mapToObj(numberFormat::format)
+		        			.collect(Collectors.toList());					   
+        
     }
 
     private static List<String> getScalableFontSizes() {

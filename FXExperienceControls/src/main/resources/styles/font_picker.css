@@ -28,14 +28,28 @@
 
     -fe-text-box-border: #676B6F;
 }
+
 .sample-text {
     -fx-fill: -text-secondary;
 }
 .prop-label {
     -fx-text-fill: -text-secondary;
 }
+
 .font-picker-pane {
     -fx-background-color: -fe-body-background;
+}
+
+.text-area .content {
+    -fx-background-color: -fe-body-background;
+    -fx-text-fill:        -text-secondary;   
+    -fx-background-radius: 0px;
+}
+
+.text-area {
+    -fx-background-color: -fe-body-background;
+    -fx-text-fill:        -text-secondary; 
+    -fx-background-radius: 0px;
 }
 
 .font-radio-button {

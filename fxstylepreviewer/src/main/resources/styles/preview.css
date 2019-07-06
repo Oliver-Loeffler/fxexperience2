@@ -1,0 +1,15 @@
+.text {
+    -fx-fill: -fx-text-background-color;
+}
+
+#PreviewArea {
+    -fx-background-color: -fx-background;
+}
+
+#ContentPane{
+    -fx-background-color: -fx-background;
+}
+
+.hyperlink {
+    -fx-text-fill: -fx-text-background-color;
+}

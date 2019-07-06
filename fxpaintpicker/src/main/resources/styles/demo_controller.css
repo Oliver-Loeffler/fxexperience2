@@ -1,0 +1,24 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 25, 2018, 2:06:06 AM
+    Author     : andje22
+*/
+.root {
+    -fx-base: #31363B;
+    -fx-background: #31363B;
+    -fx-focus-color: #0093FF;
+    -fx-control-inner-background: #232629;
+}
+.root-pane {
+    -fx-background-color: #232629;
+}
+
+.transparent-pattern {
+    -fx-background-image:  url("../images/chequers.png");
+    -fx-background-repeat: repeat;
+    -fx-background-size: auto;
+}
